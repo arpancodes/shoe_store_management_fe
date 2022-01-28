@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import { useRouter } from "next/router";
 import React, { useContext } from "react";
 import { API } from "../utils/contants";
 import Header from "../components/Header";
@@ -12,6 +13,7 @@ const Bag = () => {
   const bagDetails = useContext(BagContext);
   const setBagDetails = useContext(BagDispatchContext);
   const userDetails = useContext(UserContext);
+  const router = useRouter();
 
   const placeOrder = async () => {
     const items = bagDetails.map((item) => {
@@ -37,6 +39,7 @@ const Bag = () => {
         setBagDetails([]);
         alert("Order placed successfully");
         localStorage.removeItem("bag");
+        router.push(`/orders/${data.data.orderNo}`);
       }
     } catch (e) {
       console.log(e);

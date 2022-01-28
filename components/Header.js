@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import React, { useContext } from "react";
-import { FaUserAlt, FaShoppingBag } from "react-icons/fa";
+import { FaUserAlt, FaShoppingBag, FaReceipt } from "react-icons/fa";
 import { FiLogOut } from "react-icons/fi";
 import { UserContext, UserDispatchContext } from "../context/user";
 import { API } from "../utils/contants";
@@ -39,13 +39,20 @@ const Header = () => {
               </a>
             </Link>
             {userDetails ? (
-              <p className="flex items-center">
-                Hello, {userDetails.fname}{" "}
-                <FiLogOut
-                  className="text-3xl mx-2 cursor-pointer"
-                  onClick={handleLogout}
-                />
-              </p>
+              <>
+                <Link href="/orders">
+                  <a className="px-2 py-1">
+                    <FaReceipt className="text-3xl mx-2" />
+                  </a>
+                </Link>
+                <p className="flex items-center">
+                  Hello, {userDetails.fname}{" "}
+                  <FiLogOut
+                    className="text-3xl mx-2 cursor-pointer"
+                    onClick={handleLogout}
+                  />
+                </p>
+              </>
             ) : (
               <Link href="/login">
                 <a className="px-2 py-1">
